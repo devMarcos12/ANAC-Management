@@ -90,3 +90,96 @@ boolean grafo_cadastrar_aeroporto(GrafoVoos* grafo, const I8* codigo, const I8* 
     
     return true;
 }
+
+I32 grafo_buscar_aeroporto(const GrafoVoos* grafo, const I8* codigo){
+    if (grafo == NULL || codigo == NULL) {
+        return -1;
+    }
+
+    for (U32 i = 0; i < grafo->num_aeroportos; i++) {
+        if (aeroporto_comparar_codigo(&grafo->aeroportos[i], codigo)) {
+            return i; // Retorna o índice do aeroporto encontrado
+        }
+    }
+
+    return -1; // Retorna -1 se o aeroporto não for encontrado
+}
+
+boolean grafo_cadastrar_voo(GrafoVoos* grafo, const I8* codigo_origem, const I8* codigo_destino, U32 numero_voo){
+    if (grafo == NULL || codigo_origem == NULL || codigo_destino == NULL){
+        return false;
+    }
+
+    if (numero_voo == 0){
+        printf("Erro: Número do voo deve ser maior que zero.\n");
+        return false;
+    }
+
+    if (grafo->num_aeroportos == 0) {
+        printf("Erro: Nenhum aeroporto cadastrado.\n");
+        return false;
+    }
+
+    I32 idx_origem = grafo_buscar_aeroporto(grafo, codigo_origem);
+    I32 idx_destino = grafo_buscar_aeroporto(grafo, codigo_destino);
+    
+    if (idx_origem == -1 || idx_destino == -1) {
+        printf("Erro: Aeroporto de origem ou destino nao encontrado.\n");
+        return false;
+    }
+
+    if (idx_destino == idx_origem){
+        printf("Erro: Aeroporto de origem e destino não podem ser iguais.\n");
+        return false;
+    }
+    
+    //verificar se já existe um voo nessa rota
+    if (grafo->matriz_adjacencia[idx_origem][idx_destino].existe) {
+        printf("Erro: Já existe um voo cadastrado de %s para %s.\n", codigo_origem, codigo_destino);
+        return false;
+    }
+
+    //verificar se o numero de voo já existe
+    for (U32 i = 0; i < grafo->num_aeroportos; i++) {
+        for(U32 j = 0; j < grafo->num_aeroportos; j++) {
+            if (grafo->matriz_adjacencia[i][j].existe && 
+                grafo->matriz_adjacencia[i][j].numero_voo == numero_voo) {
+                printf("Erro: Numero do voo %u ja cadastrado.\n", numero_voo);
+                return false;
+            }
+        }
+    }
+
+    //cadastrando o voo
+    grafo->matriz_adjacencia[idx_origem][idx_destino].numero_voo = numero_voo;
+    grafo->matriz_adjacencia[idx_origem][idx_destino].existe = true;
+    printf("Voo %u cadastrado de %s para %s com sucesso!\n", 
+           numero_voo, codigo_origem, codigo_destino);
+
+}
+
+boolean remove_voo(GrafoVoos* grafo, U32 numero_voo){
+    if (grafo == NULL || numero_voo == 0 || grafo->num_aeroportos == 0) {
+        return false;
+    }
+
+    for (U32 i=0; i < grafo->num_aeroportos; i++){
+        for (U32 j=0; j < grafo->num_aeroportos; j++){
+            if (grafo->matriz_adjacencia[i][j].existe && 
+                grafo->matriz_adjacencia[i][j].numero_voo == numero_voo) {
+                    
+                    grafo->matriz_adjacencia[i][j].existe = false;
+                    grafo->matriz_adjacencia[i][j].numero_voo = 0;
+                    printf("Voo %u removido: %s -> %s\n", 
+                           numero_voo, 
+                           grafo->aeroportos[i].codigo, 
+                           grafo->aeroportos[j].codigo);
+
+                    return true;
+            }
+
+        }
+    }
+
+
+}

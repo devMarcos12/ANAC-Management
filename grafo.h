@@ -19,5 +19,8 @@ typedef struct {
 boolean grafo_inicializar(GrafoVoos* grafo);
 void grafo_destruir(GrafoVoos* grafo);
 boolean grafo_cadastrar_aeroporto(GrafoVoos* grafo, const I8* codigo, const I8* cidade);
+boolean grafo_cadastrar_voo(GrafoVoos* grafo, const I8* codigo_origem, const I8* codigo_destino, U32 numero_voo);
+I32 grafo_buscar_aeroporto(const GrafoVoos* grafo, const I8* codigo);
+boolean remove_voo(GrafoVoos* grafo, U32 numero_voo);
 
 #endif
