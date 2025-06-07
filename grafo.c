@@ -156,6 +156,7 @@ boolean grafo_cadastrar_voo(GrafoVoos* grafo, const I8* codigo_origem, const I8*
     printf("Voo %u cadastrado de %s para %s com sucesso!\n", 
            numero_voo, codigo_origem, codigo_destino);
 
+    return true;
 }
 
 boolean remove_voo(GrafoVoos* grafo, U32 numero_voo){
@@ -181,5 +182,26 @@ boolean remove_voo(GrafoVoos* grafo, U32 numero_voo){
         }
     }
 
+    printf("Erro: Voo %u não encontrado.\n", numero_voo);
+    return false;
 
 }
+
+void exibir_voos(const GrafoVoos* grafo) {
+    if (grafo == NULL || grafo->num_aeroportos == 0) {
+        printf("Nenhum voo cadastrado.\n");
+        return;
+    }
+
+    for (U32 i = 0; i < grafo->num_aeroportos; i++) {
+        for (U32 j = 0; j < grafo->num_aeroportos; j++) {
+            if (grafo->matriz_adjacencia[i][j].existe) {
+                printf("Voo %u: %s -> %s\n", 
+                       grafo->matriz_adjacencia[i][j].numero_voo, 
+                       grafo->aeroportos[i].codigo, 
+                       grafo->aeroportos[j].codigo);
+            }
+        }
+    }
+}
+
