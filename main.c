@@ -1,18 +1,28 @@
 #include <stdio.h>
+#include <locale.h>
 #include "aeroporto.h"
 #include "grafo.h"
 
-
 void menu();
 
-
 int main() {
+    setlocale(LC_ALL, "Portuguese");
+
     GrafoVoos grafo;
     
     if (!grafo_inicializar(&grafo)) {
         printf("Erro ao inicializar grafo\n");
         return 1;
     }
+
+    printf("=== Inicializando aeroportos padrão ===\n");
+    grafo_cadastrar_aeroporto(&grafo, "GRU", "São Paulo");
+    grafo_cadastrar_aeroporto(&grafo, "BSB", "Brasília");
+    grafo_cadastrar_aeroporto(&grafo, "CNF", "Belo Horizonte");
+    grafo_cadastrar_aeroporto(&grafo, "GIG", "Rio de Janeiro");
+    grafo_cadastrar_aeroporto(&grafo, "SSA", "Salvador");
+    grafo_cadastrar_aeroporto(&grafo, "FOR", "Fortaleza");
+    printf("%u aeroportos inicializados!\n\n", grafo.num_aeroportos);
 
     U8 opcao;
 
@@ -68,7 +78,8 @@ int main() {
                 break;
             }
             case 4: {
-                 // Implementar exibição de voos
+                printf("=== Exibindo voos cadastrados ===\n");
+                exibir_voos(&grafo);
                 break;
             }
             case 5:
@@ -81,22 +92,6 @@ int main() {
                 printf("Opção inválida. Tente novamente.\n");
         }
     } while (opcao != 6);
-    
-    // printf("=== Testando cadastro de aeroportos ===\n");
-    // grafo_cadastrar_aeroporto(&grafo, "BSB", "Brasilia");
-    // grafo_cadastrar_aeroporto(&grafo, "CNF", "Belo Horizonte");
-    // grafo_cadastrar_aeroporto(&grafo, "GIG", "Rio de Janeiro");
-    // grafo_cadastrar_aeroporto(&grafo, "GRU", "Sao Paulo");
-    // grafo_cadastrar_aeroporto(&grafo, "SSA", "Salvador");
-    
-    // printf("Total de aeroportos: %u\n", grafo.num_aeroportos);
-    
-    // printf("=== Testando cadastro de voos ===\n");
-    // grafo_cadastrar_voo(&grafo, "GRU", "BSB", 50);
-    // grafo_cadastrar_voo(&grafo, "SSA", "CNF", 100);
-
-    // printf("=== Testando remocao de voo ===\n");
-    // remove_voo(&grafo, 50);
 
     grafo_destruir(&grafo);
     
