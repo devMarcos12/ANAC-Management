@@ -18,7 +18,7 @@ int main() {
 
     do{
         menu();
-        scanf(" %d", &opcao);
+        scanf("%hhu", &opcao);
 
         switch(opcao) {
             case 1: {
