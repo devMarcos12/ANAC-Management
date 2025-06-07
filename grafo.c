@@ -68,6 +68,19 @@ boolean grafo_cadastrar_aeroporto(GrafoVoos* grafo, const I8* codigo, const I8* 
         }
         grafo->matriz_adjacencia = nova_matriz;
 
+        for (U32 i = 0; i < grafo->capacidade; i++) {
+            Voo* nova_linha = realloc(grafo->matriz_adjacencia[i], nova_capacidade * sizeof(Voo));
+            if (nova_linha == NULL) {
+                return false;
+            }
+            grafo->matriz_adjacencia[i] = nova_linha;
+            
+            for (U32 j = grafo->capacidade; j < nova_capacidade; j++) {
+                grafo->matriz_adjacencia[i][j].existe = false;
+                grafo->matriz_adjacencia[i][j].numero_voo = 0;
+            }
+        }
+
         for (U32 i = grafo->capacidade; i < nova_capacidade; i++) {
             grafo->matriz_adjacencia[i] = calloc(nova_capacidade, sizeof(Voo));
             if (grafo->matriz_adjacencia[i] == NULL) {

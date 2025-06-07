@@ -7,8 +7,8 @@
 #define MAX_CIDADE 50
 
 typedef struct aeroporto {
-    I8 codigo[4];
-    I8 cidade[50];
+    U8 codigo[4];
+    U8 cidade[50];
 } Aeroporto;
 
 boolean criar_aeroporto(Aeroporto *aeroporto, const I8* codigo, const I8* cidade);
