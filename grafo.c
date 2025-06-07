@@ -148,7 +148,7 @@ boolean grafo_cadastrar_voo(GrafoVoos* grafo, const I8* codigo_origem, const I8*
     
     //verificar se já existe um voo nessa rota
     if (grafo->matriz_adjacencia[idx_origem][idx_destino].existe) {
-        printf("Erro: Já existe um voo cadastrado de %s para %s.\n", codigo_origem, codigo_destino);
+        printf("Erro: Ja existe um voo cadastrado de %s para %s.\n", codigo_origem, codigo_destino);
         return false;
     }
 
