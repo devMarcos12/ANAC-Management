@@ -15,9 +15,9 @@ int main() {
         return 1;
     }
 
-    printf("=== Inicializando aeroportos padrão ===\n");
-    grafo_cadastrar_aeroporto(&grafo, "GRU", "São Paulo");
-    grafo_cadastrar_aeroporto(&grafo, "BSB", "Brasília");
+    printf("=== Inicializando aeroportos padrao ===\n");
+    grafo_cadastrar_aeroporto(&grafo, "GRU", "Sao Paulo");
+    grafo_cadastrar_aeroporto(&grafo, "BSB", "Brasilia");
     grafo_cadastrar_aeroporto(&grafo, "CNF", "Belo Horizonte");
     grafo_cadastrar_aeroporto(&grafo, "GIG", "Rio de Janeiro");
     grafo_cadastrar_aeroporto(&grafo, "SSA", "Salvador");

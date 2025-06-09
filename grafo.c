@@ -124,7 +124,7 @@ boolean grafo_cadastrar_voo(GrafoVoos* grafo, const I8* codigo_origem, const I8*
     }
 
     if (numero_voo == 0){
-        printf("Erro: Número do voo deve ser maior que zero.\n");
+        printf("Erro: Numero do voo deve ser maior que zero.\n");
         return false;
     }
 

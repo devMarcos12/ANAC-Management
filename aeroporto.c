@@ -9,7 +9,7 @@ boolean criar_aeroporto(Aeroporto *aeroporto, const I8* codigo, const I8* cidade
     }
     
     if (strlen(codigo) != 3) {
-        printf("Erro: Código deve ter exatamente 3 caracteres.\n");
+        printf("Erro: Codigo deve ter exatamente 3 caracteres.\n");
         return false;
     }
     
@@ -20,7 +20,7 @@ boolean criar_aeroporto(Aeroporto *aeroporto, const I8* codigo, const I8* cidade
     
     for (int i = 0; i < 3; i++) {
         if (!isalpha(codigo[i])) {
-            printf("Erro: Código deve conter apenas letras.\n");
+            printf("Erro: Codigo deve conter apenas letras.\n");
             return false;
         }
         aeroporto->codigo[i] = toupper(codigo[i]);
