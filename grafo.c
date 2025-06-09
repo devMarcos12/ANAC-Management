@@ -142,7 +142,7 @@ boolean grafo_cadastrar_voo(GrafoVoos* grafo, const I8* codigo_origem, const I8*
     }
 
     if (idx_destino == idx_origem){
-        printf("Erro: Aeroporto de origem e destino não podem ser iguais.\n");
+        printf("Erro: Aeroporto de origem e destino nao podem ser iguais.\n");
         return false;
     }
     
@@ -195,7 +195,7 @@ boolean remove_voo(GrafoVoos* grafo, U32 numero_voo){
         }
     }
 
-    printf("Erro: Voo %u não encontrado.\n", numero_voo);
+    printf("Erro: Voo %u nao encontrado.\n", numero_voo);
     return false;
 
 }
