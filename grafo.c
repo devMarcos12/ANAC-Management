@@ -218,3 +218,40 @@ void exibir_voos(const GrafoVoos* grafo) {
     }
 }
 
+void grafo_listar_possiveis_trajetos(const GrafoVoos* grafo, 
+    const I8* codigo_origem, const I8* codigo_destino){
+        if (grafo == NULL || codigo_origem == NULL || codigo_destino == NULL) {
+            printf("Erro: Grafo ou codigos invalidos.\n");
+            return;
+        }
+
+        I32 idx_origem = grafo_buscar_aeroporto(grafo, codigo_origem);
+        I32 idx_destino = grafo_buscar_aeroporto(grafo, codigo_destino);
+
+        if (idx_origem == -1 || idx_destino == -1) {
+            printf("Erro: Aeroporto de origem ou destino nao encontrado.\n");
+            return;
+        }
+
+        if (idx_destino == idx_origem){
+            printf("Erro: Aeroporto de origem e destino nao podem ser iguais.\n");
+            return false;   
+        }
+
+        printf("Possiveis trajetos de %s para %s:\n", 
+               grafo->aeroportos[idx_origem].codigo, 
+               grafo->aeroportos[idx_destino].codigo);
+        boolean encontrou = false;
+        
+    }
+
+void dfs_trajetos(const GrafoVoos* grafo, 
+    const I8* codigo_origem, const I8* codigo_destino, 
+    boolean* visitado, U32* caminho, U32 profundidade){
+    if (grafo == NULL || codigo_origem == NULL || codigo_destino == NULL || 
+        visitado == NULL || caminho == NULL) {
+        printf("Erro: Grafo ou parametros invalidos.\n");
+        return false;
+    }
+    I32 idx_origem = grafo_buscar_aeroporto(grafo, codigo_origem);
+}
