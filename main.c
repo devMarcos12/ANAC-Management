@@ -24,6 +24,18 @@ int main() {
     grafo_cadastrar_aeroporto(&grafo, "FOR", "Fortaleza");
     printf("%u aeroportos inicializados!\n\n", grafo.num_aeroportos);
 
+    printf("=== Inicializando voos por padrao ===\n");
+    grafo_cadastrar_voo(&grafo, "GRU", "BSB", 1001);
+    grafo_cadastrar_voo(&grafo, "GRU", "CNF", 1002);
+    grafo_cadastrar_voo(&grafo, "BSB", "GIG", 1003);
+    grafo_cadastrar_voo(&grafo, "CNF", "SSA", 1004);
+    grafo_cadastrar_voo(&grafo, "GIG", "FOR", 1005);
+    grafo_cadastrar_voo(&grafo, "SSA", "GRU", 1006);
+    grafo_cadastrar_voo(&grafo, "FOR", "BSB", 1007);
+    grafo_cadastrar_voo(&grafo, "FOR", "GIG", 1008);
+    grafo_cadastrar_voo(&grafo, "CNF", "FOR", 1009);
+    grafo_cadastrar_voo(&grafo, "BSB", "CNF", 1010);
+
     U8 opcao;
 
     do{
@@ -83,7 +95,14 @@ int main() {
                 break;
             }
             case 5:
-                // Implementar exibição de trajetos possíveis
+                U8 codigo_origem[MAX_CODIGO];
+                U8 codigo_destino[MAX_CODIGO];
+                printf("Digite o codigo do aeroporto de origem: ");
+                scanf("%s", codigo_origem);
+                printf("Digite o codigo do aeroporto de destino: ");
+                scanf("%s", codigo_destino);
+                printf("=== Possiveis trajetos de %s para %s ===\n", codigo_origem, codigo_destino);
+                grafo_listar_possiveis_trajetos(&grafo, codigo_origem, codigo_destino);
                 break;
             case 6:
                 printf("Saindo...\n");
