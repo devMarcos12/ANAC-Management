@@ -1,7 +1,7 @@
 # Makefile simples
 CC = gcc
 CFLAGS = -Wall -Wextra -g
-TARGET = grafos
+TARGET = airport
 
 all: $(TARGET)
 
