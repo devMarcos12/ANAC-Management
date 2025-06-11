@@ -12,9 +12,9 @@ make
 
 After compiling, you can run the program with:
 
-Windows: ./airport.exe
-
-Linux/macOS: ./airport
+ Windows:  ``` .\airport.exe ```<br>
+ 
+ Linux/macOS: ``` .\airport ```
 
 ## Data Structure
 
