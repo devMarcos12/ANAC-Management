@@ -42,6 +42,10 @@ int main() {
         menu();
         scanf("%hhu", &opcao);
 
+        if (getchar() != '\n') {
+            while (getchar() != '\n');
+        }
+
         switch(opcao) {
             case 1: {
                 I8 codigo[MAX_CODIGO];
@@ -94,16 +98,16 @@ int main() {
                 exibir_voos(&grafo);
                 break;
             }
-            case 5:
-                U8 codigo_origem[MAX_CODIGO];
-                U8 codigo_destino[MAX_CODIGO];
+            case 5: {
+                I8 codigo_origem[MAX_CODIGO];
+                I8 codigo_destino[MAX_CODIGO];
                 printf("Digite o codigo do aeroporto de origem: ");
                 scanf("%s", codigo_origem);
                 printf("Digite o codigo do aeroporto de destino: ");
                 scanf("%s", codigo_destino);
-                printf("=== Possiveis trajetos de %s para %s ===\n", codigo_origem, codigo_destino);
                 grafo_listar_possiveis_trajetos(&grafo, codigo_origem, codigo_destino);
                 break;
+            }
             case 6:
                 printf("Saindo...\n");
                 break;
