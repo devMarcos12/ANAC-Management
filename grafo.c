@@ -202,21 +202,35 @@ boolean remove_voo(GrafoVoos* grafo, U32 numero_voo){
 
 }
 
-void exibir_voos(const GrafoVoos* grafo) {
-    if (grafo == NULL || grafo->num_aeroportos == 0) {
-        printf("Nenhum voo cadastrado.\n");
+void exibir_voos_aeroporto(const GrafoVoos* grafo, const I8* codigo_aeroporto) {
+    if (grafo == NULL || codigo_aeroporto == NULL || grafo->num_aeroportos == 0) {
+        printf("Erro: Dados invalidos.\n");
         return;
     }
 
-    for (U32 i = 0; i < grafo->num_aeroportos; i++) {
-        for (U32 j = 0; j < grafo->num_aeroportos; j++) {
-            if (grafo->matriz_adjacencia[i][j].existe) {
-                printf("Voo %u: %s -> %s\n", 
-                       grafo->matriz_adjacencia[i][j].numero_voo, 
-                       grafo->aeroportos[i].codigo, 
-                       grafo->aeroportos[j].codigo);
-            }
+    I32 idx_aeroporto = grafo_buscar_aeroporto(grafo, codigo_aeroporto);
+    if (idx_aeroporto == -1) {
+        printf("Erro: Aeroporto %s nao encontrado.\n", codigo_aeroporto);
+        return;
+    }
+
+    printf("=== Voos saindo de %s (%s) ===\n", 
+           codigo_aeroporto, grafo->aeroportos[idx_aeroporto].cidade);
+
+    boolean encontrou_voos = false;
+    for (U32 j = 0; j < grafo->num_aeroportos; j++) {
+        if (grafo->matriz_adjacencia[idx_aeroporto][j].existe) {
+            printf("Voo %u: %s -> %s (%s)\n", 
+                   grafo->matriz_adjacencia[idx_aeroporto][j].numero_voo,
+                   codigo_aeroporto,
+                   grafo->aeroportos[j].codigo,
+                   grafo->aeroportos[j].cidade);
+            encontrou_voos = true;
         }
+    }
+
+    if (!encontrou_voos) {
+        printf("Nenhum voo encontrado saindo de %s.\n", codigo_aeroporto);
     }
 }
 

@@ -15,26 +15,25 @@ int main() {
         return 1;
     }
 
-    printf("=== Inicializando aeroportos padrao ===\n");
-    grafo_cadastrar_aeroporto(&grafo, "GRU", "Sao Paulo");
-    grafo_cadastrar_aeroporto(&grafo, "BSB", "Brasilia");
+    printf("=== Inicializando aeroportos conforme especificação ===\n");
     grafo_cadastrar_aeroporto(&grafo, "CNF", "Belo Horizonte");
+    grafo_cadastrar_aeroporto(&grafo, "BSB", "Brasilia");
     grafo_cadastrar_aeroporto(&grafo, "GIG", "Rio de Janeiro");
     grafo_cadastrar_aeroporto(&grafo, "SSA", "Salvador");
-    grafo_cadastrar_aeroporto(&grafo, "FOR", "Fortaleza");
+    grafo_cadastrar_aeroporto(&grafo, "GRU", "Sao Paulo");
     printf("%u aeroportos inicializados!\n\n", grafo.num_aeroportos);
 
     printf("=== Inicializando voos por padrao ===\n");
-    grafo_cadastrar_voo(&grafo, "GRU", "BSB", 1001);
-    grafo_cadastrar_voo(&grafo, "GRU", "CNF", 1002);
-    grafo_cadastrar_voo(&grafo, "BSB", "GIG", 1003);
-    grafo_cadastrar_voo(&grafo, "CNF", "SSA", 1004);
-    grafo_cadastrar_voo(&grafo, "GIG", "FOR", 1005);
-    grafo_cadastrar_voo(&grafo, "SSA", "GRU", 1006);
-    grafo_cadastrar_voo(&grafo, "FOR", "BSB", 1007);
-    grafo_cadastrar_voo(&grafo, "FOR", "GIG", 1008);
-    grafo_cadastrar_voo(&grafo, "CNF", "FOR", 1009);
-    grafo_cadastrar_voo(&grafo, "BSB", "CNF", 1010);
+    grafo_cadastrar_voo(&grafo, "GRU", "BSB", 50);
+    grafo_cadastrar_voo(&grafo, "GIG", "CNF", 554);
+    grafo_cadastrar_voo(&grafo, "GRU", "CNF", 102);
+    grafo_cadastrar_voo(&grafo, "SSA", "CNF", 215);
+    grafo_cadastrar_voo(&grafo, "CNF", "GIG", 555);
+    grafo_cadastrar_voo(&grafo, "GRU", "GIG", 51);
+    grafo_cadastrar_voo(&grafo, "CNF", "GRU", 101);
+    grafo_cadastrar_voo(&grafo, "GIG", "GRU", 90);
+    grafo_cadastrar_voo(&grafo, "BSB", "SSA", 107);
+    grafo_cadastrar_voo(&grafo, "CNF", "SSA", 108);
 
     U8 opcao;
 
@@ -94,8 +93,10 @@ int main() {
                 break;
             }
             case 4: {
-                printf("=== Exibindo voos cadastrados ===\n");
-                exibir_voos(&grafo);
+                I8 codigo_aeroporto[MAX_CODIGO];
+                printf("Digite o codigo do aeroporto: ");
+                scanf("%s", codigo_aeroporto);
+                exibir_voos_aeroporto(&grafo, codigo_aeroporto);
                 break;
             }
             case 5: {

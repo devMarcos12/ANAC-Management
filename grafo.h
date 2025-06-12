@@ -23,7 +23,7 @@ boolean grafo_cadastrar_voo(GrafoVoos* grafo, const I8* codigo_origem,
     const I8* codigo_destino, U32 numero_voo);
 I32 grafo_buscar_aeroporto(const GrafoVoos* grafo, const I8* codigo);
 boolean remove_voo(GrafoVoos* grafo, U32 numero_voo);
-void exibir_voos(const GrafoVoos* grafo);
+void exibir_voos_aeroporto(const GrafoVoos* grafo, const I8* codigo_aeroporto);
 void grafo_listar_possiveis_trajetos(const GrafoVoos* grafo, 
     const I8* codigo_origem, const I8* codigo_destino);
 void dfs_trajetos(const GrafoVoos* grafo, 
